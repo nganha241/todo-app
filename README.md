@@ -1,7 +1,7 @@
 # TODO App 
 ## Requirement
 
-0. Init project by using create-react-app with typescript template
+0. 0. Install and prepare
 ```
 yarn
 
