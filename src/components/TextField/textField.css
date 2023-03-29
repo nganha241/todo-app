@@ -1,0 +1,17 @@
+.input-todo {
+    margin-bottom: 20px;
+}
+
+.input-todo input{
+    height: 60px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 1px solid #FFF2CC;
+    padding: 2px 10px;
+    font-size: 1.3rem;
+}
+
+.input-todo input:focus {
+    outline: none;
+}

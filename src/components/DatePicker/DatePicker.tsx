@@ -1,5 +1,10 @@
 import React from 'react';
-
-export const DatePicker = (): JSX.Element => {
-  return <div>DatePicker</div>;
+import './datepicker.css';
+interface props {
+  setDatePicker: any
+}
+export const DatePicker = ({ setDatePicker }: props): JSX.Element => {
+  return <div className='input-date'>
+    <input type="datetime-local" onChange={(e) => setDatePicker(e.target.value)} placeholder='Dealine' />
+  </div>;
 };

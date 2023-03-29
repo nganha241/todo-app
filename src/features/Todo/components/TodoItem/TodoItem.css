@@ -1,0 +1,65 @@
+.todo-item {
+    padding: 20px;
+    position: relative;
+    z-index: 50;
+    border-bottom: #F5EBEB 1px solid;
+    display: flex;
+    align-items: center;
+}
+
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-item input[type="checkbox"] {
+    appearance: none;
+    vertical-align:middle;
+}
+
+.todo-item input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.25);
+    background-color: #F5EBEB;
+    border-color: #F5EBEB;
+    cursor: pointer;
+    padding: 15px;
+}
+.todo-item input[type="checkbox"]:checked {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23867070' viewBox='0 0 16 16'%3e%3cpath d='M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z'/%3e%3c/svg%3e");
+}
+
+.todo-item label {
+    padding: 15px 15px 15px 25px;
+    font-size: 1.5rem;
+    word-wrap:break-word;
+}
+
+.todo-action {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    display: flex;
+    gap: 20px;
+    font-size: 1.2rem;
+    color: #D5B4B4;
+    transition: .4s;
+    
+}
+
+.todo-delete:hover, .todo-edit:hover {
+    color: #867070;
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.todo-completed {
+    text-decoration: line-through;
+    pointer-events: none;
+    color: gray;
+}
+
+.check {
+    pointer-events: none;
+}

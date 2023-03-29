@@ -1,0 +1,13 @@
+
+.header {
+    margin-top: 50px;
+    text-align: center;
+    /* padding: 0px 500px; */
+}
+
+.header-title {
+    font-size: 5rem;
+    letter-spacing: 2px;
+    color: #F4B183;
+}
+

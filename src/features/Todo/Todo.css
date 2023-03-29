@@ -1,0 +1,27 @@
+.add-todo {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #FFF2CC;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: grey;
+}
+
+.todo-list {
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 1px 0px 10px 0px;
+    background: white;
+}
+
+.footer {
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    color: gray;
+    background: white;
+}
