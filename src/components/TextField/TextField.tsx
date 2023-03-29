@@ -1,5 +1,5 @@
 import React from 'react';
-import './textfield.css';
+import './textField.css';
 
 interface props {
   placeholder: string

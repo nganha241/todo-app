@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal } from './components/Modal/Modal';
 import './Todo.css';
 
 export const Todo = (): JSX.Element => {
+  const [isShow, setShow] = useState(false);
+  const handleClickShowModal = (): void => {
+    setShow(true);
+  };
   return (
     <div className='todo'>
-      <div className='add-todo'>Add new...</div>
+      {isShow ? <Modal setShow={setShow}/> : ''}
+      <div className='add-todo' onClick={handleClickShowModal}>Add new...</div>
       <div className='todo-list'>
       </div>
       <div className='footer'>
