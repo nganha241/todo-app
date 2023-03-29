@@ -7,9 +7,6 @@
     align-items: center;
 }
 
-.todo-item:last-child {
-    border-bottom: none;
-}
 
 .todo-item input[type="checkbox"] {
     appearance: none;
@@ -31,9 +28,8 @@
 }
 
 .todo-item label {
-    padding: 15px 15px 15px 25px;
-    font-size: 1.5rem;
-    word-wrap:break-word;
+    padding: 15px 40px 15px 25px;
+    font-size: 1.2rem;
 }
 
 .todo-action {
@@ -63,3 +59,53 @@
 .check {
     pointer-events: none;
 }
+
+.todo-dealine {
+    position: absolute;
+    bottom: 0;
+    left: 11%;
+    margin-bottom: 10px;
+    color: #B46060;
+    font-style: italic;
+}
+
+.return {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0, 0, 0.5);
+    opacity: 0.5;
+    padding: 150px 300px;
+    animation: hideAnimation 0s ease-in 1s;
+    animation-fill-mode: forwards;
+    
+}
+
+.return-title {
+    width: 30%;
+    padding: 20px;
+    background: #F9F5EB;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    font-size: 1.5rem;
+    top: 20%;
+    left: 35%;
+    font-weight: bold;
+}
+
+.return-icon {
+    font-size: 4rem;
+    color: green;
+}
+
+@keyframes hideAnimation {
+    to {
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
+  }

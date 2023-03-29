@@ -1,3 +1,7 @@
+.todo {
+    margin-bottom: 50px;
+}
+
 .add-todo {
     margin-top: 50px;
     margin-bottom: 20px;
@@ -14,7 +18,26 @@
     padding: 20px;
     box-shadow: rgba(100, 100, 111, 0.2) 1px 0px 10px 0px;
     background: white;
+    height: 350px;
+    overflow-y: scroll;
 }
+
+.todo-list::-webkit-scrollbar-track
+{
+	background-color: #FEFAE0;
+}
+
+.todo-list::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.todo-list::-webkit-scrollbar-thumb
+{
+	background-color: #FAEDCD;
+}
+
 
 .footer {
     padding: 20px;
@@ -25,3 +48,16 @@
     color: gray;
     background: white;
 }
+
+@media only screen and (max-width: 992px) {
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .filter-item {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+  }

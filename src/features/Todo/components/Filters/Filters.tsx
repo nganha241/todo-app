@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Filters.css';
+import './Filter.css';
 
 interface props {
   setSort: any
