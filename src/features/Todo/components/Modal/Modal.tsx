@@ -6,9 +6,12 @@ import { DatePicker } from '../../../../components/DatePicker/DatePicker';
 import { TodoContext } from '../../contexts/TodoContext';
 interface props {
   setShow: React.Dispatch<React.SetStateAction<boolean>>
+  id: string
+  editDescription: string
+  editDeadline: string
 }
-export const Modal = ({ setShow }: props): JSX.Element => {
-  const { addTodo } = useContext(TodoContext);
+export const Modal = ({ setShow, id, editDeadline, editDescription }: props): JSX.Element => {
+  const { addTodo, editTodo } = useContext(TodoContext);
   const [description, setDescription] = useState();
   const [deadline, setDatePicker] = useState();
   const [errDesc, setErrDesc] = useState('');
@@ -30,7 +33,11 @@ export const Modal = ({ setShow }: props): JSX.Element => {
         setErrDate('');
       }
     } else {
-      void addTodo({ description, deadline });
+      if (id !== '') {
+        void editTodo(id, { description, deadline });
+      } else {
+        void addTodo({ description, deadline });
+      }
       setShow(false);
     }
   };
@@ -38,9 +45,9 @@ export const Modal = ({ setShow }: props): JSX.Element => {
     <div className='modal-form'>
       <div className='modal-close' onClick={handleClickShowModal}><FaTimesCircle/></div>
       <form className='form' onSubmit={handleAdd}>
-        <TextField placeholder='Add new...' setDescription={setDescription}/>
+        <TextField placeholder='Add new...' setDescription={setDescription} editDescription={editDescription}/>
         <div className='err'>{errDesc}</div>
-        <DatePicker setDatePicker={setDatePicker}/>
+        <DatePicker setDatePicker={setDatePicker} editDescription={editDeadline}/>
         <div className='err'>{errDate}</div>
         <div className='btn-form'>
           <button className='btn-add'>Add new</button>

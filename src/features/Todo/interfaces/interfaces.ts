@@ -1,4 +1,4 @@
-export interface Todo {
+export interface Todos {
   id: string
   description: string
   isCompleted: boolean
@@ -6,7 +6,7 @@ export interface Todo {
 }
 
 export interface TodoState {
-  todos: Todo[] | any
+  todos: Todos[] | any
   loading: boolean
   nbpages: number
   page: number

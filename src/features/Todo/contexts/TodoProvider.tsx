@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react';
-import { Todo, TodoState } from '../interfaces/interfaces';
+import { TodoState } from '../interfaces/interfaces';
 import { TodoContext } from './TodoContext';
 import { TodoReducer } from './TodoReducer';
 
@@ -34,6 +34,9 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
       const res = await axios.post('https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos', body).then();
       dispatch({ type: 'addTodo', payload: res.data });
       dispatch({ type: 'loading', payload: true });
+      setTimeout(() => {
+        dispatch({ type: 'loading', payload: false });
+      }, 300);
     } catch (error) {
       console.log(error);
     }
@@ -44,21 +47,28 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
       await axios.delete(`https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos/${id}`).then();
       dispatch({ type: 'deleteTodo', payload: id });
       dispatch({ type: 'loading', payload: true });
+      setTimeout(() => {
+        dispatch({ type: 'loading', payload: false });
+      }, 300);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function editTodo (id: string, body: Todo): Promise<void> {
+  async function editTodo (id: string, body: {description: string, deadline: string}): Promise<void> {
     try {
-      const res = await axios.put(`https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos/${id}`, body);
+      const res = await axios.put(`https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos/${id}`, body).then();
       dispatch({ type: 'editTodo', payload: res.data });
+      dispatch({ type: 'loading', payload: true });
+      setTimeout(() => {
+        dispatch({ type: 'loading', payload: false });
+      }, 300);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function tickTodo (id: string, body: boolean): Promise<void> {
+  async function tickTodo (id: string, body: {isCompleted: boolean}): Promise<void> {
     try {
       await axios.put(`https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos/${id}`, body).then();
       dispatch({ type: 'tickTodo', payload: id });

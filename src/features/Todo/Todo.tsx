@@ -3,6 +3,7 @@ import { Filters } from './components/Filters/Filters';
 import { Modal } from './components/Modal/Modal';
 import { TodoItem } from './components/TodoItem/TodoItem';
 import { TodoContext } from './contexts/TodoContext';
+import { Todos } from './interfaces/interfaces';
 import './Todo.css';
 
 export const Todo = (): JSX.Element => {
@@ -17,19 +18,19 @@ export const Todo = (): JSX.Element => {
 
   useEffect(() => {
     if (click !== undefined) {
-      void tickTodo(click, true);
+      void tickTodo(click, { isCompleted: true });
     }
   }, [click]);
 
   return (
     <div className='todo'>
-      {isShow ? <Modal setShow={setShow}/> : ''}
+      {isShow ? <Modal setShow={setShow} id='' editDescription='' editDeadline=''/> : ''}
       <div className='add-todo' onClick={handleClickShowModal}>Add new...</div>
       <div className='todo-list'>
         {sort === 'Active'
-          ? todos.map((todo: any) => {
+          ? todos.map((todo: Todos) => {
             return (
-              todo.isCompleted === false &&
+              !(todo.isCompleted) &&
               (<TodoItem
                 key={todo.id}
                 description={todo.description} deadline={todo.deadline} isCompleted={todo.isCompleted} id={todo.id} setClick={setClick}
@@ -38,9 +39,9 @@ export const Todo = (): JSX.Element => {
           })
           : null}
         {sort === 'Completed'
-          ? todos.map((todo: any) => {
+          ? todos.map((todo: Todos) => {
             return (
-              todo.isCompleted === true &&
+              todo.isCompleted &&
                 (<TodoItem
                   key={todo.id}
                   description={todo.description} deadline={todo.deadline} isCompleted={todo.isCompleted} id={todo.id} setClick={setClick}
@@ -49,7 +50,7 @@ export const Todo = (): JSX.Element => {
           })
           : null}
         {sort === 'All'
-          ? todos.map((todo: any) => {
+          ? todos.map((todo: Todos) => {
             return (
               <TodoItem
                 key={todo.id}
