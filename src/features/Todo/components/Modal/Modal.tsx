@@ -22,12 +22,12 @@ export const Modal = ({ setShow, id, editDeadline, editDescription }: props): JS
   const handleAdd = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     if (description === undefined || deadline === undefined) {
-      if (description === undefined) {
+      if (description === undefined || editDescription === undefined) {
         setErrDesc('* It is required!');
       } else {
         setErrDesc('');
       }
-      if (deadline === undefined) {
+      if (deadline === undefined || editDeadline === undefined) {
         setErrDate('* It is required!');
       } else {
         setErrDate('');

@@ -15,12 +15,15 @@ interface props {
   children: JSX.Element | JSX.Element[]
 }
 
+const BaseUrl = process.env.REACT_APP_API as string;
+
 export const TodoProvider = ({ children }: props): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const allTodo = async () => {
     try {
-      const res = await axios.get('https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos').then();
+      const res = await axios.get(`${BaseUrl}`).then();
       dispatch({ type: 'allTodo', payload: res.data });
+      console.log(process.env.REACT_APP_API);
     } catch (err) {
       console.log(err);
     }
@@ -31,7 +34,7 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
 
   async function addTodo (body: {description: string, deadline: string}): Promise<void> {
     try {
-      const res = await axios.post('https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos', body).then();
+      const res = await axios.post(`${BaseUrl}`, body).then();
       dispatch({ type: 'addTodo', payload: res.data });
       dispatch({ type: 'loading', payload: true });
       setTimeout(() => {
@@ -44,7 +47,7 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
 
   async function deleteTodo (id: string): Promise<void> {
     try {
-      await axios.delete(`https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos/${id}`).then();
+      await axios.delete(`${BaseUrl}` + '/' + `${id}`).then();
       dispatch({ type: 'deleteTodo', payload: id });
       dispatch({ type: 'loading', payload: true });
       setTimeout(() => {
@@ -57,7 +60,7 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
 
   async function editTodo (id: string, body: {description: string, deadline: string}): Promise<void> {
     try {
-      const res = await axios.put(`https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos/${id}`, body).then();
+      const res = await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
       dispatch({ type: 'editTodo', payload: res.data });
       dispatch({ type: 'loading', payload: true });
       setTimeout(() => {
@@ -70,7 +73,7 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
 
   async function tickTodo (id: string, body: {isCompleted: boolean}): Promise<void> {
     try {
-      await axios.put(`https://6411611663cb211e7e0d2a99.mockapi.io/todo/v1/todos/${id}`, body).then();
+      await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
       dispatch({ type: 'tickTodo', payload: id });
     } catch (error) {
       console.log(error);

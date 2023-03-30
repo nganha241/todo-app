@@ -43,20 +43,23 @@ export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: p
       <div>{todoState.loading
         ? <div className='return'>
           <div className='return-title'>
-            <div className='return-icon'><BsCheck2Circle/></div>
+            <div className='return-icon'><BsCheck2Circle /></div>
             <p>Success!</p>
           </div>
         </div>
         : ''}
       </div>
-      {deleteModal ? <Notification setDeleteModal={setDeleteModal} id={idDelete}/> : ''}
-      {isEdit ? <Modal setShow={setEdit} id={idDelete} editDescription={decription} editDeadline={deadlineE}/> : ''}
+      {deleteModal ? <Notification setDeleteModal={setDeleteModal} id={idDelete} /> : ''}
+      {isEdit ? <Modal setShow={setEdit} id={idDelete} editDescription={decription} editDeadline={deadlineE} /> : ''}
       <div className='todo-item'>
-        <input className={isCompleted ? 'check' : ''} type="checkbox" defaultChecked={isCompleted} onChange={() => handleCompleted(id)}/><span></span>
+        <input
+          className={isCompleted ? 'check' : ''}
+          type="checkbox"
+          defaultChecked={isCompleted} onChange={() => handleCompleted(id)} /><span></span>
         <label className={isCompleted ? 'todo-completed' : 'todo-title'}>{description}</label>
         <div className='todo-action'>
-          <div className='todo-edit' onClick={() => handleEdit(id, description, deadline)}><FaPencilAlt/></div>
-          <div className='todo-delete' onClick={() => showNotification(id)}><FaTimesCircle/></div>
+          <div className='todo-edit' onClick={() => handleEdit(id, description, deadline)}><FaPencilAlt /></div>
+          <div className='todo-delete' onClick={() => showNotification(id)}><FaTimesCircle /></div>
         </div>
       </div>
     </>
