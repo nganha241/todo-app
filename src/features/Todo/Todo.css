@@ -51,7 +51,6 @@
 
 @media only screen and (max-width: 992px) {
     .footer {
-        flex-direction: column;
         gap: 10px;
     }
     .filter-item {

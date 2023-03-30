@@ -12,8 +12,8 @@ interface props {
 }
 export const Modal = ({ setShow, id, editDeadline, editDescription }: props): JSX.Element => {
   const { addTodo, editTodo } = useContext(TodoContext);
-  const [description, setDescription] = useState();
-  const [deadline, setDatePicker] = useState();
+  const [description, setDescription] = useState('');
+  const [deadline, setDatePicker] = useState('');
   const [errDesc, setErrDesc] = useState('');
   const [errDate, setErrDate] = useState('');
   const handleClickShowModal = (): void => {
@@ -21,13 +21,13 @@ export const Modal = ({ setShow, id, editDeadline, editDescription }: props): JS
   };
   const handleAdd = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (description === undefined || deadline === undefined) {
-      if (description === undefined || editDescription === undefined) {
+    if (description === '' || deadline === '') {
+      if (description === '') {
         setErrDesc('* It is required!');
       } else {
         setErrDesc('');
       }
-      if (deadline === undefined || editDeadline === undefined) {
+      if (deadline === '') {
         setErrDate('* It is required!');
       } else {
         setErrDate('');
@@ -47,7 +47,7 @@ export const Modal = ({ setShow, id, editDeadline, editDescription }: props): JS
       <form className='form' onSubmit={handleAdd}>
         <TextField placeholder='Add new...' setDescription={setDescription} editDescription={editDescription}/>
         <div className='err'>{errDesc}</div>
-        <DatePicker setDatePicker={setDatePicker} editDescription={editDeadline}/>
+        <DatePicker setDatePicker={setDatePicker} editDeadline={editDeadline}/>
         <div className='err'>{errDate}</div>
         <div className='btn-form'>
           <button className='btn-add'>Add new</button>

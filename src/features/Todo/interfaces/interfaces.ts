@@ -8,6 +8,4 @@ export interface Todos {
 export interface TodoState {
   todos: Todos[] | any
   loading: boolean
-  nbpages: number
-  page: number
 }

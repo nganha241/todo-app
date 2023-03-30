@@ -78,3 +78,23 @@
 .btn-no:hover {
     box-shadow: #D5B4B4 0px 3px 8px;
 }
+
+@media only screen and (max-width: 992px) {
+    .notification {
+        padding: 150px 50px;
+    }
+    .notification-box {
+        width: 50%;
+        transform: translate(50%, 10%);
+    }
+  }
+  
+@media only screen and (max-width: 768px) {
+    .notification {
+        padding: 150px 0px;
+    }
+    .notification-box {
+        width: 70%;
+        transform: translate(20%, 10%);
+    }
+  }

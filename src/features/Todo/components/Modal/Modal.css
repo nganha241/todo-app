@@ -79,3 +79,25 @@
     margin-bottom: 20px;
     color: red;
 }
+
+@media only screen and (max-width: 992px) {
+    .modal-add {
+        padding: 150px 50px;
+    }
+  }
+
+@media only screen and (max-width: 768px) {
+    .modal-add {
+        padding: 150px 30px;
+    }
+    .form {
+        padding: 30px 20px;
+    }
+    .btn-add {
+        margin-right: 0px;
+        margin-bottom: 5px;
+    }
+    .btn-cancel {
+        margin-left: 0px;
+    }
+  }

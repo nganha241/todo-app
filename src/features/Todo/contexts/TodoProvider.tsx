@@ -6,9 +6,7 @@ import { TodoReducer } from './TodoReducer';
 
 const INITIAL_STATE: TodoState = {
   todos: [],
-  loading: false,
-  nbpages: 0,
-  page: 0
+  loading: false
 };
 
 interface props {
@@ -18,12 +16,10 @@ interface props {
 const BaseUrl = process.env.REACT_APP_API as string;
 
 export const TodoProvider = ({ children }: props): JSX.Element => {
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const allTodo = async () => {
+  const allTodo = async (): Promise<void> => {
     try {
       const res = await axios.get(`${BaseUrl}`).then();
       dispatch({ type: 'allTodo', payload: res.data });
-      console.log(process.env.REACT_APP_API);
     } catch (err) {
       console.log(err);
     }

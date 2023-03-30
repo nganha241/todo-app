@@ -12,9 +12,12 @@ export const Todo = (): JSX.Element => {
   const [isShow, setShow] = useState(false);
   const [sort, setSort] = useState('All');
   const [click, setClick] = useState();
+  // const [total, setTotal] = useState(0);
   const handleClickShowModal = (): void => {
     setShow(true);
   };
+  const completed = todos.filter((todo: any) => todo.isCompleted === true);
+  const active = todos.filter((todo: any) => todo.isCompleted === false);
 
   useEffect(() => {
     if (click !== undefined) {
@@ -33,7 +36,10 @@ export const Todo = (): JSX.Element => {
               !(todo.isCompleted) &&
               (<TodoItem
                 key={todo.id}
-                description={todo.description} deadline={todo.deadline} isCompleted={todo.isCompleted} id={todo.id} setClick={setClick}
+                description={todo.description}
+                deadline={todo.deadline}
+                isCompleted={todo.isCompleted}
+                id={todo.id} setClick={setClick}
               />)
             );
           })
@@ -44,7 +50,10 @@ export const Todo = (): JSX.Element => {
               todo.isCompleted &&
                 (<TodoItem
                   key={todo.id}
-                  description={todo.description} deadline={todo.deadline} isCompleted={todo.isCompleted} id={todo.id} setClick={setClick}
+                  description={todo.description}
+                  deadline={todo.deadline}
+                  isCompleted={todo.isCompleted}
+                  id={todo.id} setClick={setClick}
                 />)
             );
           })
@@ -54,14 +63,17 @@ export const Todo = (): JSX.Element => {
             return (
               <TodoItem
                 key={todo.id}
-                description={todo.description} deadline={todo.deadline} isCompleted={todo.isCompleted} id={todo.id} setClick={setClick}
+                description={todo.description}
+                deadline={todo.deadline}
+                isCompleted={todo.isCompleted}
+                id={todo.id} setClick={setClick}
               />
             );
           })
           : null}
       </div>
       <div className='footer'>
-        <Filters setSort={setSort}/>
+        <Filters setSort={setSort} all={todos.length} completed={completed.length} active={active.length}/>
       </div>
     </div>
   );

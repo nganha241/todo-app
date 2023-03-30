@@ -20,7 +20,7 @@ export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: p
   const [idDelete, setId] = useState('');
 
   const [isEdit, setEdit] = useState(false);
-  const [decription, setDescription] = useState('');
+  const [descriptionE, setDescription] = useState('');
   const [deadlineE, setDeadline] = useState('');
 
   const handleCompleted = (id: string): void => {
@@ -31,7 +31,6 @@ export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: p
     setId(id);
   };
   const handleEdit = (id: string, description: string, deadline: string): void => {
-    console.log(id);
     setEdit(true);
     setId(id);
     setDescription(description);
@@ -50,7 +49,7 @@ export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: p
         : ''}
       </div>
       {deleteModal ? <Notification setDeleteModal={setDeleteModal} id={idDelete} /> : ''}
-      {isEdit ? <Modal setShow={setEdit} id={idDelete} editDescription={decription} editDeadline={deadlineE} /> : ''}
+      {isEdit ? <Modal setShow={setEdit} id={idDelete} editDescription={descriptionE} editDeadline={deadlineE} /> : ''}
       <div className='todo-item'>
         <input
           className={isCompleted ? 'check' : ''}
