@@ -5,7 +5,7 @@
     z-index: 1000;
     width: 100%;
     height: 100%;
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color:var(--bg-opacity);
     padding: 150px 300px;
 }
 
@@ -14,8 +14,8 @@
     transform: translate(120%, 20%);
     width: 30%;
     padding: 20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    background: #F9F5EB;
+    box-shadow: var(--box-shadow) 0px 7px 29px 0px;
+    background: var(--bg-color);
     border-radius: 15px;
     animation-name: showModal;
     animation-duration: 0.7s;
@@ -36,7 +36,7 @@
 .modal-close {
     text-align: end;
     font-size: 1.3rem;
-    color: #D5B4B4;
+    color: var(--light-color);
     cursor: pointer;
 }
 
@@ -46,7 +46,7 @@
 
 .notification-icon {
     margin-top: 20px;
-    color: red;
+    color: var(--red);
     font-size: 2rem;
 }
 
@@ -56,7 +56,7 @@
     border-radius: 10px;
     border: none;
     font-size: 1rem;
-    color: white;
+    color: var(--white);
     font-size: 1.2rem;
     cursor: pointer;
 }
@@ -68,19 +68,19 @@
 }
 
 .btn-yes {
-    background: #867070;
+    background: var(--bold-color);
 }
 
 .btn-yes:hover {
-    box-shadow: #867070 0px 3px 8px;
+    box-shadow: var(--bold-color) 0px 3px 8px;
 }
 
 .btn-no {
-    background: #D5B4B4;
+    background: var(--light-color);
 }
 
 .btn-no:hover {
-    box-shadow: #D5B4B4 0px 3px 8px;
+    box-shadow: var(--light-color) 0px 3px 8px;
 }
 
 @media only screen and (max-width: 992px) {

@@ -1,9 +1,9 @@
 .filter-name {
     cursor: pointer;
-    color: #D5B4B4;
+    color: var(--light-color);
 }
 
 .isActived {
-    color: #867070;
+    color: var(--bold-color);
     cursor: default;
 }

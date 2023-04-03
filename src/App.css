@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
 
+:root {
+  --bg-color: #F9F5EB;
+  --light-color: #D5B4B4;
+  --bold-color: #867070;
+  --scroll: #F5F5F5;
+  --scrollbar-thumb: #FAEDCD;
+  --bg-input: #FFF2CC;
+  --bg-opacity: rgba(0, 0, 0, 0.25);
+  --box-shadow: rgba(100, 100, 111, 0.2);
+  --deadline: #B46060;
+  --bg-todo-item: #F5EBEB;
+  --gray: gray;
+  --white: white;
+  --green: green;
+  --red: red;
+  --black: black;
+  --header-title: #F4B183;
+}
+
 *,
 *::after,
 *::before {
@@ -7,13 +26,12 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Ubuntu', sans-serif;
-  /* background: #F9F5EB; */
 }
 
 body {
   margin: auto;
   width: 50%;
-  background: #F9F5EB;
+  background: var(--bg-color);
 }
 
 @media only screen and (max-width: 992px) {
