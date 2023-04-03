@@ -8,14 +8,14 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { BsCheck2Circle } from 'react-icons/bs';
 import { MdErrorOutline } from 'react-icons/md';
 import './Todo.css';
-import { ESort } from './interfaces/const';
+import { EStatus } from './interfaces/const';
 
 export const Todo = (): JSX.Element => {
   const { todoState, tickTodo } = useContext(TodoContext);
   const todos = todoState.todos;
 
   const [isShow, setShow] = useState<boolean>(false);
-  const [sort, setSort] = useState<string>(ESort.All);
+  const [sort, setSort] = useState<string>(EStatus.All);
   const [click, setClick] = useState<string>('');
 
   const handleClickShowModal = (): void => {
@@ -58,7 +58,7 @@ export const Todo = (): JSX.Element => {
         {isShow ? <Modal setShow={setShow} id='' editDescription='' editDeadline='' /> : ''}
         <div className='add-todo' onClick={handleClickShowModal}>Add new...</div>
         <div className='todo-list'>
-          {sort === ESort.Active
+          {sort === EStatus.Active
             ? todos.map((todo: ITodos) => {
               return (
                 !(todo.isCompleted) &&
@@ -72,7 +72,7 @@ export const Todo = (): JSX.Element => {
               );
             })
             : null}
-          {sort === ESort.Completed
+          {sort === EStatus.Completed
             ? todos.map((todo: ITodos) => {
               return (
                 todo.isCompleted &&
@@ -86,7 +86,7 @@ export const Todo = (): JSX.Element => {
               );
             })
             : null}
-          {sort === ESort.All
+          {sort === EStatus.All
             ? todos.map((todo: ITodos) => {
               return (
                 <TodoItem

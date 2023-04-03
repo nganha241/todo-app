@@ -9,7 +9,7 @@ export enum EActionType {
   Succsess = 'succsess'
 }
 
-export enum ESort {
+export enum EStatus {
   Active = 'Active',
   Completed = 'Completed',
   All = 'All'
