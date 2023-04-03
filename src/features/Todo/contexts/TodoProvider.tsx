@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react';
-import { TodoState } from '../interfaces/interfaces';
+import { ITodoState } from '../interfaces/interfaces';
 import { TodoContext } from './TodoContext';
 import { TodoReducer } from './TodoReducer';
-import { Type } from '../interfaces/const';
+import { EActionType } from '../interfaces/const';
 
-const INITIAL_STATE: TodoState = {
+const INITIAL_STATE: ITodoState = {
   todos: [],
   succsess: false,
   fail: false,
@@ -20,28 +20,27 @@ const BaseUrl = process.env.REACT_APP_API as string;
 
 export const TodoProvider = ({ children }: props): JSX.Element => {
   const loading = (): void => {
-    dispatch({ type: Type.Succsess, payload: true });
+    dispatch({ type: EActionType.Succsess, payload: true });
     setTimeout(() => {
-      dispatch({ type: Type.Loading, payload: false });
-      dispatch({ type: Type.Succsess, payload: false });
+      dispatch({ type: EActionType.Loading, payload: false });
+      dispatch({ type: EActionType.Succsess, payload: false });
     }, 500);
   };
 
   const fail = (): void => {
-    dispatch({ type: Type.Fail, payload: true });
-    dispatch({ type: Type.Loading, payload: false });
+    dispatch({ type: EActionType.Fail, payload: true });
+    dispatch({ type: EActionType.Loading, payload: false });
     setTimeout(() => {
-      dispatch({ type: Type.Fail, payload: false });
+      dispatch({ type: EActionType.Fail, payload: false });
     }, 500);
   };
 
   const allTodo = async (): Promise<void> => {
-    dispatch({ type: Type.Loading, payload: true });
+    dispatch({ type: EActionType.Loading, payload: true });
     try {
       const res = await axios.get(`${BaseUrl}`).then();
-      dispatch({ type: Type.AllTodo, payload: res.data });
-      console.log(typeof Object.entries(res.data));
-      dispatch({ type: Type.Loading, payload: false });
+      dispatch({ type: EActionType.AllTodo, payload: res.data });
+      dispatch({ type: EActionType.Loading, payload: false });
     } catch (error) {
       fail();
     }
@@ -51,10 +50,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }, []);
 
   async function addTodo (body: { description: string, deadline: string }): Promise<void> {
-    dispatch({ type: Type.Loading, payload: true });
+    dispatch({ type: EActionType.Loading, payload: true });
     try {
       const res = await axios.post(`${BaseUrl}`, body).then();
-      dispatch({ type: Type.AddTodo, payload: res.data });
+      dispatch({ type: EActionType.AddTodo, payload: res.data });
       loading();
     } catch (error) {
       fail();
@@ -62,10 +61,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }
 
   async function deleteTodo (id: string): Promise<void> {
-    dispatch({ type: Type.Loading, payload: true });
+    dispatch({ type: EActionType.Loading, payload: true });
     try {
       await axios.delete(`${BaseUrl}` + '/' + `${id}`).then();
-      dispatch({ type: Type.DeleteTodo, payload: id });
+      dispatch({ type: EActionType.DeleteTodo, payload: id });
       loading();
     } catch (error) {
       fail();
@@ -73,10 +72,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }
 
   async function editTodo (id: string, body: { description: string, deadline: string }): Promise<void> {
-    dispatch({ type: Type.Loading, payload: true });
+    dispatch({ type: EActionType.Loading, payload: true });
     try {
       const res = await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
-      dispatch({ type: Type.EditTodo, payload: res.data });
+      dispatch({ type: EActionType.EditTodo, payload: res.data });
       loading();
     } catch (error) {
       fail();
@@ -84,10 +83,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }
 
   async function tickTodo (id: string, body: { isCompleted: boolean }): Promise<void> {
-    dispatch({ type: Type.Loading, payload: true });
+    dispatch({ type: EActionType.Loading, payload: true });
     try {
       await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
-      dispatch({ type: Type.TickTodo, payload: id });
+      dispatch({ type: EActionType.TickTodo, payload: id });
       loading();
     } catch (error) {
       fail();

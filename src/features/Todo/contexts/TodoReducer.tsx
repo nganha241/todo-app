@@ -1,34 +1,34 @@
-import { Type } from '../interfaces/const';
-import { Todos, TodoState } from '../interfaces/interfaces';
+import { EActionType } from '../interfaces/const';
+import { ITodos, ITodoState } from '../interfaces/interfaces';
 
 type TodoAction =
-  | { type: Type.AllTodo, payload: Todos }
-  | { type: Type.AddTodo, payload: Todos }
-  | { type: Type.DeleteTodo, payload: string }
-  | { type: Type.EditTodo, payload: Todos }
-  | { type: Type.Loading, payload: boolean }
-  | { type: Type.TickTodo, payload: string }
-  | { type: Type.Fail, payload: boolean }
-  | { type: Type.Succsess, payload: boolean }
+  | { type: EActionType.AllTodo, payload: ITodos }
+  | { type: EActionType.AddTodo, payload: ITodos }
+  | { type: EActionType.DeleteTodo, payload: string }
+  | { type: EActionType.EditTodo, payload: ITodos }
+  | { type: EActionType.Loading, payload: boolean }
+  | { type: EActionType.TickTodo, payload: string }
+  | { type: EActionType.Fail, payload: boolean }
+  | { type: EActionType.Succsess, payload: boolean }
 
-export const TodoReducer = (state: TodoState, action: TodoAction): TodoState => {
+export const TodoReducer = (state: ITodoState, action: TodoAction): ITodoState => {
   switch (action.type) {
-    case 'allTodo':
+    case EActionType.AllTodo:
       return {
         ...state,
         todos: state.todos.concat(action.payload)
       };
-    case 'addTodo':
+    case EActionType.AddTodo:
       return {
         ...state,
         todos: [...state.todos, action.payload]
       };
-    case 'deleteTodo':
+    case EActionType.DeleteTodo:
       return {
         ...state,
-        todos: state.todos.filter((todo: Todos) => todo.id !== action.payload)
+        todos: state.todos.filter((todo: ITodos) => todo.id !== action.payload)
       };
-    case 'editTodo':
+    case EActionType.EditTodo:
       return {
         ...state,
         todos: state.todos.map(({ ...todo }) => {
@@ -38,22 +38,22 @@ export const TodoReducer = (state: TodoState, action: TodoAction): TodoState => 
           return todo;
         })
       };
-    case 'loading':
+    case EActionType.Loading:
       return {
         ...state,
         loading: action.payload
       };
-    case 'fail':
+    case EActionType.Fail:
       return {
         ...state,
         fail: action.payload
       };
-    case 'succsess':
+    case EActionType.Succsess:
       return {
         ...state,
         succsess: action.payload
       };
-    case 'tickTodo':
+    case EActionType.TickTodo:
       return {
         ...state,
         todos: state.todos.map(({ ...todo }) => {

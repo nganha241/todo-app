@@ -1,4 +1,4 @@
-export enum Type {
+export enum EActionType {
   AllTodo = 'allTodo',
   AddTodo = 'addTodo',
   DeleteTodo = 'deleteTodo',
@@ -9,8 +9,13 @@ export enum Type {
   Succsess = 'succsess'
 }
 
-export enum Sort {
+export enum ESort {
   Active = 'Active',
   Completed = 'Completed',
   All = 'All'
+}
+
+export enum EClassStatus {
+  FilterName = 'filter-name',
+  IsActive = 'isActive'
 }

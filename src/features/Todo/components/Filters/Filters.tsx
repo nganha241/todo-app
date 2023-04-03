@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import './Filter.css';
+import { EClassStatus, ESort } from '../../interfaces/const';
 
 interface props {
   setSort: Dispatch<SetStateAction<string>>
@@ -9,17 +10,17 @@ interface props {
 }
 
 export const Filters = ({ setSort, completed, active, all }: props): JSX.Element => {
-  const [activeClass, setActiveClass] = useState('All');
+  const [activeClass, setActiveClass] = useState<string>(ESort.All);
   const handleFilter = (filter: string): void => {
     setSort(filter);
     setActiveClass(filter);
   };
   return <React.Fragment>
-    <div onClick={() => handleFilter('All')}
-      className={activeClass === 'All' ? 'isActive' : 'filter-name'}>All ({all})</div>
-    <div onClick={() => handleFilter('Active')}
-      className={activeClass === 'Active' ? 'isActive' : 'filter-name'}>Active ({active})</div>
-    <div onClick={() => handleFilter('Completed')}
-      className={activeClass === 'Completed' ? 'isActive' : 'filter-name'}>Completed ({completed})</div>
+    <div onClick={() => handleFilter(ESort.All)}
+      className={activeClass === ESort.All ? EClassStatus.IsActive : EClassStatus.FilterName}>All ({all})</div>
+    <div onClick={() => handleFilter(ESort.Active)}
+      className={activeClass === ESort.Active ? EClassStatus.IsActive : EClassStatus.FilterName}>Active ({active})</div>
+    <div onClick={() => handleFilter(ESort.Completed)}
+      className={activeClass === ESort.Completed ? EClassStatus.IsActive : EClassStatus.FilterName}>Completed ({completed})</div>
   </React.Fragment>;
 };

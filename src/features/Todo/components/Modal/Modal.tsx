@@ -4,7 +4,7 @@ import './Modal.css';
 import { FaTimesCircle } from 'react-icons/fa';
 import { DatePicker } from '../../../../components/DatePicker/DatePicker';
 import { TodoContext } from '../../contexts/TodoContext';
-import { Todos } from '../../interfaces/interfaces';
+import { ITodos } from '../../interfaces/interfaces';
 interface props {
   setShow: React.Dispatch<React.SetStateAction<boolean>>
   id: string
@@ -26,11 +26,8 @@ export const Modal = ({ setShow, id, editDeadline, editDescription }: props): JS
     setShow(false);
   };
 
-  const checkDesc = todoState.todos.filter((todo: Todos): boolean => {
-    if (todo.description === description) {
-      return true;
-    }
-    return false;
+  const checkDesc = todoState.todos.filter((todo: ITodos): boolean => {
+    return todo.description === description;
   });
 
   const valid = (): void => {

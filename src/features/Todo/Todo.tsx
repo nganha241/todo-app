@@ -3,26 +3,26 @@ import { Filters } from './components/Filters/Filters';
 import { Modal } from './components/Modal/Modal';
 import { TodoItem } from './components/TodoItem/TodoItem';
 import { TodoContext } from './contexts/TodoContext';
-import { Todos } from './interfaces/interfaces';
+import { ITodos } from './interfaces/interfaces';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { BsCheck2Circle } from 'react-icons/bs';
 import { MdErrorOutline } from 'react-icons/md';
 import './Todo.css';
-import { Sort } from './interfaces/const';
+import { ESort } from './interfaces/const';
 
 export const Todo = (): JSX.Element => {
   const { todoState, tickTodo } = useContext(TodoContext);
   const todos = todoState.todos;
 
   const [isShow, setShow] = useState<boolean>(false);
-  const [sort, setSort] = useState('All');
+  const [sort, setSort] = useState<string>(ESort.All);
   const [click, setClick] = useState<string>('');
 
   const handleClickShowModal = (): void => {
     setShow(true);
   };
-  const completed = todos.filter((todo: Todos) => todo.isCompleted);
-  const active = todos.filter((todo: Todos) => !todo.isCompleted);
+  const completed = todos.filter((todo: ITodos) => todo.isCompleted ?? false);
+  const active = todos.filter((todo: ITodos) => !(todo.isCompleted) ?? true);
 
   useEffect(() => {
     if (click !== '') {
@@ -33,7 +33,7 @@ export const Todo = (): JSX.Element => {
 
   return (
     <>
-      <div>{todoState.loading
+      <div>{todoState.loading === true
         ? <div className='loading'>
           <div className='loading-detail'><AiOutlineLoading3Quarters /></div>
         </div>
@@ -58,8 +58,8 @@ export const Todo = (): JSX.Element => {
         {isShow ? <Modal setShow={setShow} id='' editDescription='' editDeadline='' /> : ''}
         <div className='add-todo' onClick={handleClickShowModal}>Add new...</div>
         <div className='todo-list'>
-          {sort === Sort.Active
-            ? todos.map((todo: Todos) => {
+          {sort === ESort.Active
+            ? todos.map((todo: ITodos) => {
               return (
                 !(todo.isCompleted) &&
                 (<TodoItem
@@ -72,8 +72,8 @@ export const Todo = (): JSX.Element => {
               );
             })
             : null}
-          {sort === Sort.Completed
-            ? todos.map((todo: Todos) => {
+          {sort === ESort.Completed
+            ? todos.map((todo: ITodos) => {
               return (
                 todo.isCompleted &&
                 (<TodoItem
@@ -86,8 +86,8 @@ export const Todo = (): JSX.Element => {
               );
             })
             : null}
-          {sort === Sort.All
-            ? todos.map((todo: Todos) => {
+          {sort === ESort.All
+            ? todos.map((todo: ITodos) => {
               return (
                 <TodoItem
                   key={todo.id}
