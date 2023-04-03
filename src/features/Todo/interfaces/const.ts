@@ -9,13 +9,10 @@ export enum EActionType {
   Succsess = 'succsess'
 }
 
-export enum EStatus {
+export enum ETodoStatus {
   Active = 'Active',
   Completed = 'Completed',
-  All = 'All'
-}
-
-export enum EClassStatus {
+  All = 'All',
   FilterName = 'filter-name',
   IsActive = 'isActive'
 }
