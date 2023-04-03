@@ -3,7 +3,6 @@ import { TodoState } from '../interfaces/interfaces';
 
 export interface TodoContextProps {
   todoState: TodoState
-  allTodo: () => Promise<void>
   addTodo: (body: {description: string, deadline: string}) => Promise<void>
   deleteTodo: (id: string) => Promise<void>
   editTodo: (id: string, body: {description: string, deadline: string}) => Promise<void>

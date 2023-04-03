@@ -1,21 +1,22 @@
+import { Type } from '../interfaces/const';
 import { Todos, TodoState } from '../interfaces/interfaces';
 
 type TodoAction =
-  | { type: 'allTodo', payload: Todos }
-  | { type: 'addTodo', payload: Todos }
-  | { type: 'deleteTodo', payload: string }
-  | { type: 'editTodo', payload: Todos }
-  | { type: 'loading', payload: boolean }
-  | { type: 'tickTodo', payload: string }
-  | { type: 'fail', payload: boolean }
-  | { type: 'succsess', payload: boolean }
+  | { type: Type.AllTodo, payload: Todos }
+  | { type: Type.AddTodo, payload: Todos }
+  | { type: Type.DeleteTodo, payload: string }
+  | { type: Type.EditTodo, payload: Todos }
+  | { type: Type.Loading, payload: boolean }
+  | { type: Type.TickTodo, payload: string }
+  | { type: Type.Fail, payload: boolean }
+  | { type: Type.Succsess, payload: boolean }
 
 export const TodoReducer = (state: TodoState, action: TodoAction): TodoState => {
   switch (action.type) {
     case 'allTodo':
       return {
         ...state,
-        todos: action.payload
+        todos: state.todos.concat(action.payload)
       };
     case 'addTodo':
       return {

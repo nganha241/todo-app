@@ -14,10 +14,10 @@ interface props {
 export const Modal = ({ setShow, id, editDeadline, editDescription }: props): JSX.Element => {
   const { addTodo, editTodo, todoState } = useContext(TodoContext);
 
-  const [description, setDescription] = useState('');
-  const [deadline, setDatePicker] = useState('');
+  const [description, setDescription] = useState<string>('');
+  const [deadline, setDatePicker] = useState<string>('');
 
-  const [validation, setValidation] = useState({
+  const [validation, setValidation] = useState<{description: string, deadline: string}>({
     description: '',
     deadline: ''
   });

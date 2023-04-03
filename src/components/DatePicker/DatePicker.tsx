@@ -2,7 +2,7 @@ import React from 'react';
 import './datepicker.css';
 
 interface props {
-  setDatePicker: any
+  setDatePicker: React.Dispatch<React.SetStateAction<string>>
   editDeadline: string
 }
 export const DatePicker = ({ setDatePicker, editDeadline }: props): JSX.Element => {

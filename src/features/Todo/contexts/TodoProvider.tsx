@@ -3,6 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 import { TodoState } from '../interfaces/interfaces';
 import { TodoContext } from './TodoContext';
 import { TodoReducer } from './TodoReducer';
+import { Type } from '../interfaces/const';
 
 const INITIAL_STATE: TodoState = {
   todos: [],
@@ -19,27 +20,28 @@ const BaseUrl = process.env.REACT_APP_API as string;
 
 export const TodoProvider = ({ children }: props): JSX.Element => {
   const loading = (): void => {
-    dispatch({ type: 'succsess', payload: true });
+    dispatch({ type: Type.Succsess, payload: true });
     setTimeout(() => {
-      dispatch({ type: 'loading', payload: false });
-      dispatch({ type: 'succsess', payload: false });
+      dispatch({ type: Type.Loading, payload: false });
+      dispatch({ type: Type.Succsess, payload: false });
     }, 500);
   };
 
   const fail = (): void => {
-    dispatch({ type: 'fail', payload: true });
-    dispatch({ type: 'loading', payload: false });
+    dispatch({ type: Type.Fail, payload: true });
+    dispatch({ type: Type.Loading, payload: false });
     setTimeout(() => {
-      dispatch({ type: 'fail', payload: false });
+      dispatch({ type: Type.Fail, payload: false });
     }, 500);
   };
 
   const allTodo = async (): Promise<void> => {
-    dispatch({ type: 'loading', payload: true });
+    dispatch({ type: Type.Loading, payload: true });
     try {
-      const res = await axios.get(`${BaseUrl}`);
-      dispatch({ type: 'allTodo', payload: res.data });
-      dispatch({ type: 'loading', payload: false });
+      const res = await axios.get(`${BaseUrl}`).then();
+      dispatch({ type: Type.AllTodo, payload: res.data });
+      console.log(typeof Object.entries(res.data));
+      dispatch({ type: Type.Loading, payload: false });
     } catch (error) {
       fail();
     }
@@ -49,10 +51,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }, []);
 
   async function addTodo (body: { description: string, deadline: string }): Promise<void> {
-    dispatch({ type: 'loading', payload: true });
+    dispatch({ type: Type.Loading, payload: true });
     try {
       const res = await axios.post(`${BaseUrl}`, body).then();
-      dispatch({ type: 'addTodo', payload: res.data });
+      dispatch({ type: Type.AddTodo, payload: res.data });
       loading();
     } catch (error) {
       fail();
@@ -60,10 +62,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }
 
   async function deleteTodo (id: string): Promise<void> {
-    dispatch({ type: 'loading', payload: true });
+    dispatch({ type: Type.Loading, payload: true });
     try {
       await axios.delete(`${BaseUrl}` + '/' + `${id}`).then();
-      dispatch({ type: 'deleteTodo', payload: id });
+      dispatch({ type: Type.DeleteTodo, payload: id });
       loading();
     } catch (error) {
       fail();
@@ -71,10 +73,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }
 
   async function editTodo (id: string, body: { description: string, deadline: string }): Promise<void> {
-    dispatch({ type: 'loading', payload: true });
+    dispatch({ type: Type.Loading, payload: true });
     try {
       const res = await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
-      dispatch({ type: 'editTodo', payload: res.data });
+      dispatch({ type: Type.EditTodo, payload: res.data });
       loading();
     } catch (error) {
       fail();
@@ -82,10 +84,10 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
   }
 
   async function tickTodo (id: string, body: { isCompleted: boolean }): Promise<void> {
-    dispatch({ type: 'loading', payload: true });
+    dispatch({ type: Type.Loading, payload: true });
     try {
       await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
-      dispatch({ type: 'tickTodo', payload: id });
+      dispatch({ type: Type.TickTodo, payload: id });
       loading();
     } catch (error) {
       fail();
@@ -94,7 +96,7 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
 
   const [todoState, dispatch] = useReducer(TodoReducer, INITIAL_STATE);
   return (
-    <TodoContext.Provider value={{ todoState, allTodo, addTodo, deleteTodo, tickTodo, editTodo }}>
+    <TodoContext.Provider value={{ todoState, addTodo, deleteTodo, tickTodo, editTodo }}>
       {children}
     </TodoContext.Provider>
   );

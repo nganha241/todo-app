@@ -3,7 +3,7 @@ import './textField.css';
 
 interface props {
   placeholder: string
-  setDescription: any
+  setDescription: React.Dispatch<React.SetStateAction<string>>
   editDescription: string
 }
 

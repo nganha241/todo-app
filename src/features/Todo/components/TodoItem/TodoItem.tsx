@@ -3,23 +3,23 @@ import './TodoItem.css';
 import { FaTimesCircle, FaPencilAlt } from 'react-icons/fa';
 import { Notification } from '../Notification/Notification';
 import { Modal } from '../Modal/Modal';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 interface props {
   description: string
   deadline: string
   isCompleted: boolean
   id: string
-  setClick: any
+  setClick: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: props): JSX.Element => {
-  const [deleteModal, setDeleteModal] = useState(false);
-  const [idDelete, setId] = useState('');
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [idDelete, setId] = useState<string>('');
 
-  const [isEdit, setEdit] = useState(false);
-  const [descriptionE, setDescription] = useState('');
-  const [deadlineE, setDeadline] = useState('');
+  const [isEdit, setEdit] = useState<boolean>(false);
+  const [descriptionE, setDescription] = useState<string>('');
+  const [deadlineE, setDeadline] = useState<string>('');
 
   const handleCompleted = (id: string): void => {
     setClick(id);
@@ -35,7 +35,7 @@ export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: p
     setDeadline(deadline);
   };
 
-  const convertDate = (date: any): number => {
+  const convertDate = (date: Moment): number => {
     const now = moment().toArray();
     return date.diff(now, 'minutes');
   };

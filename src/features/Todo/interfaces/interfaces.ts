@@ -6,7 +6,7 @@ export interface Todos {
 }
 
 export interface TodoState {
-  todos: Todos[] | any
+  todos: Todos[]
   loading: boolean
   fail: Boolean
   succsess: Boolean
