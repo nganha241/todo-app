@@ -61,8 +61,13 @@
     cursor: pointer;
 }
 
+.btn-notification {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .btn-yes {
-    margin-right: 10px;
     background: #867070;
 }
 
@@ -71,7 +76,6 @@
 }
 
 .btn-no {
-    margin-left: 10px;
     background: #D5B4B4;
 }
 
@@ -97,4 +101,4 @@
         width: 70%;
         transform: translate(20%, 10%);
     }
-  }
+}

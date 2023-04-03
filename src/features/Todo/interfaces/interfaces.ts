@@ -8,4 +8,6 @@ export interface Todos {
 export interface TodoState {
   todos: Todos[] | any
   loading: boolean
+  fail: Boolean
+  succsess: Boolean
 }

@@ -9,7 +9,6 @@ interface props {
 }
 
 export const Filters = ({ setSort, completed, active, all }: props): JSX.Element => {
-  console.log(completed);
   const [activeClass, setActiveClass] = useState('All');
   const handleFilter = (filter: string): void => {
     setSort(filter);

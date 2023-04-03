@@ -44,6 +44,12 @@
     
 }
 
+.todo-edit, .todo-disabled {
+    border: none;
+    background: none;
+    font-size: 1.2rem;
+}
+
 .todo-delete:hover, .todo-edit:hover {
     color: #867070;
     cursor: pointer;
@@ -69,44 +75,13 @@
     font-style: italic;
 }
 
-.return {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 100%;
-    height: 100%;
-    background-color:rgba(0, 0, 0, 0);
-    padding: 150px 300px;
-    color: white;
-    animation: hideAnimation 0s ease-in 1s;
-    animation-fill-mode: forwards;
-    
+.todo-dealine {
+    position: absolute;
+    bottom: 0;
+    left: 11%;
+    margin-bottom: 10px;
+    color: #B46060;
+    font-style: italic;
 }
 
-.return-title {
-    width: 30%;
-    padding: 20px;
-    background: #111;
-    border-radius: 15px;
-    text-align: center;
-    position: relative;
-    font-size: 1.5rem;
-    top: 20%;
-    left: 35%;
-    font-weight: bold;
-}
-
-.return-icon {
-    font-size: 4rem;
-    color: green;
-}
-
-@keyframes hideAnimation {
-    to {
-      visibility: hidden;
-      width: 0;
-      height: 0;
-    }
-  }
 

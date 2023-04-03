@@ -43,7 +43,9 @@
 
 .btn-form {
     margin-top: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .btn-form button {
@@ -92,12 +94,5 @@
     }
     .form {
         padding: 30px 20px;
-    }
-    .btn-add {
-        margin-right: 0px;
-        margin-bottom: 5px;
-    }
-    .btn-cancel {
-        margin-left: 0px;
     }
   }

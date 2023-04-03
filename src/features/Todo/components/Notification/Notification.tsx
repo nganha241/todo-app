@@ -21,7 +21,7 @@ export const Notification = ({ setDeleteModal, id }: props): JSX.Element => {
         <p className='notification-title'>Do you want delete it?
           <div className='notification-icon'><FaTimes/></div>
         </p>
-        <div>
+        <div className='btn-notification'>
           <button className='btn-yes' onClick={handleClickYes}>Yes</button>
           <button className='btn-no' onClick={handleClickNo}>No</button>
         </div>

@@ -8,12 +8,17 @@ interface props {
 }
 
 export const TextField = ({ placeholder, setDescription, editDescription }: props): JSX.Element => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setDescription(e.target.value.trim());
+  };
+
   return (
     <div className='input-todo'>
       <input type="text"
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={handleOnChange}
         placeholder={placeholder}
-        defaultValue={editDescription} />
+        defaultValue={editDescription}
+        autoFocus />
     </div>
   );
 };

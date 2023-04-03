@@ -1,12 +1,14 @@
 import { Todos, TodoState } from '../interfaces/interfaces';
 
 type TodoAction =
-| { type: 'allTodo', payload: Todos }
-| { type: 'addTodo', payload: Todos }
-| { type: 'deleteTodo', payload: string }
-| { type: 'editTodo', payload: Todos }
-| { type: 'loading', payload: boolean }
-| { type: 'tickTodo', payload: string }
+  | { type: 'allTodo', payload: Todos }
+  | { type: 'addTodo', payload: Todos }
+  | { type: 'deleteTodo', payload: string }
+  | { type: 'editTodo', payload: Todos }
+  | { type: 'loading', payload: boolean }
+  | { type: 'tickTodo', payload: string }
+  | { type: 'fail', payload: boolean }
+  | { type: 'succsess', payload: boolean }
 
 export const TodoReducer = (state: TodoState, action: TodoAction): TodoState => {
   switch (action.type) {
@@ -40,6 +42,16 @@ export const TodoReducer = (state: TodoState, action: TodoAction): TodoState => 
         ...state,
         loading: action.payload
       };
+    case 'fail':
+      return {
+        ...state,
+        fail: action.payload
+      };
+    case 'succsess':
+      return {
+        ...state,
+        succsess: action.payload
+      };
     case 'tickTodo':
       return {
         ...state,
@@ -50,7 +62,6 @@ export const TodoReducer = (state: TodoState, action: TodoAction): TodoState => 
           return todo;
         })
       };
-
     default:
       return state;
   }

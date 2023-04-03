@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
-import { TodoContext } from '../../contexts/TodoContext';
+import React, { useState } from 'react';
 import './TodoItem.css';
 import { FaTimesCircle, FaPencilAlt } from 'react-icons/fa';
-import { BsCheck2Circle } from 'react-icons/bs';
 import { Notification } from '../Notification/Notification';
 import { Modal } from '../Modal/Modal';
+import moment from 'moment';
 
 interface props {
   description: string
@@ -15,7 +14,6 @@ interface props {
 }
 
 export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: props): JSX.Element => {
-  const { todoState } = useContext(TodoContext);
   const [deleteModal, setDeleteModal] = useState(false);
   const [idDelete, setId] = useState('');
 
@@ -37,28 +35,30 @@ export const TodoItem = ({ description, deadline, isCompleted, id, setClick }: p
     setDeadline(deadline);
   };
 
+  const convertDate = (date: any): number => {
+    const now = moment().toArray();
+    return date.diff(now, 'minutes');
+  };
+
   return (
     <>
-      <div>{todoState.loading
-        ? <div className='return'>
-          <div className='return-title'>
-            <div className='return-icon'><BsCheck2Circle /></div>
-            <p>Success!</p>
-          </div>
-        </div>
-        : ''}
-      </div>
       {deleteModal ? <Notification setDeleteModal={setDeleteModal} id={idDelete} /> : ''}
       {isEdit ? <Modal setShow={setEdit} id={idDelete} editDescription={descriptionE} editDeadline={deadlineE} /> : ''}
       <div className='todo-item'>
         <input
           className={isCompleted ? 'check' : ''}
           type="checkbox"
+          disabled={isCompleted}
           defaultChecked={isCompleted} onChange={() => handleCompleted(id)} /><span></span>
         <label className={isCompleted ? 'todo-completed' : 'todo-title'}>{description}</label>
         <div className='todo-action'>
-          <div className='todo-edit' onClick={() => handleEdit(id, description, deadline)}><FaPencilAlt /></div>
+          <button onClick={() => handleEdit(id, description, deadline)} className={isCompleted ? 'todo-disabled' : 'todo-edit'} disabled={isCompleted}><FaPencilAlt /></button>
           <div className='todo-delete' onClick={() => showNotification(id)}><FaTimesCircle /></div>
+        </div>
+        <div className='todo-dealine'>
+          <span>{convertDate(moment(deadline)) <= 60 && isCompleted
+            ? `You have ${moment(deadline).endOf('hour').fromNow()} left to complete`
+            : ''}</span>
         </div>
       </div>
     </>
