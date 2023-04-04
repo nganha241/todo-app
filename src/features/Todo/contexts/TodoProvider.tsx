@@ -1,9 +1,9 @@
-import axios from 'axios';
 import React, { useEffect, useReducer } from 'react';
-import { ITodoState } from '../interfaces/interfaces';
+import { ITodoState, ITodos } from '../interfaces/interfaces';
 import { TodoContext } from './TodoContext';
 import { TodoReducer } from './TodoReducer';
 import { EActionType } from '../interfaces/const';
+import { addNewTodo, deleteATodo, editATodo, getAll, tickATodo } from '../Service/API';
 
 const INITIAL_STATE: ITodoState = {
   todos: [],
@@ -15,8 +15,6 @@ const INITIAL_STATE: ITodoState = {
 interface props {
   children: JSX.Element | JSX.Element[]
 }
-
-const BaseUrl = process.env.REACT_APP_API as string;
 
 export const TodoProvider = ({ children }: props): JSX.Element => {
   const loading = (): void => {
@@ -35,12 +33,13 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
     }, 500);
   };
 
-  const allTodo = async (): Promise<void> => {
+  const allTodo = (): void => {
     dispatch({ type: EActionType.Loading, payload: true });
     try {
-      const res = await axios.get(`${BaseUrl}`).then();
-      dispatch({ type: EActionType.AllTodo, payload: res.data });
-      dispatch({ type: EActionType.Loading, payload: false });
+      void getAll().then((res: ITodos) => {
+        dispatch({ type: EActionType.AllTodo, payload: res });
+        dispatch({ type: EActionType.Loading, payload: false });
+      });
     } catch (error) {
       fail();
     }
@@ -49,45 +48,49 @@ export const TodoProvider = ({ children }: props): JSX.Element => {
     void allTodo();
   }, []);
 
-  async function addTodo (body: { description: string, deadline: string }): Promise<void> {
+  const addTodo = async (body: { description: string, deadline: string }): Promise<void> => {
     dispatch({ type: EActionType.Loading, payload: true });
     try {
-      const res = await axios.post(`${BaseUrl}`, body).then();
-      dispatch({ type: EActionType.AddTodo, payload: res.data });
-      loading();
+      void addNewTodo(body).then((res: ITodos) => {
+        dispatch({ type: EActionType.AddTodo, payload: res });
+        loading();
+      });
     } catch (error) {
       fail();
     }
-  }
+  };
 
-  async function deleteTodo (id: string): Promise<void> {
+  const deleteTodo = async (id: string): Promise<void> => {
     dispatch({ type: EActionType.Loading, payload: true });
     try {
-      await axios.delete(`${BaseUrl}` + '/' + `${id}`).then();
-      dispatch({ type: EActionType.DeleteTodo, payload: id });
-      loading();
+      void deleteATodo(id).then(() => {
+        dispatch({ type: EActionType.DeleteTodo, payload: id });
+        loading();
+      });
     } catch (error) {
       fail();
     }
-  }
+  };
 
-  async function editTodo (id: string, body: { description: string, deadline: string }): Promise<void> {
+  const editTodo = async (id: string, body: { description: string, deadline: string }): Promise<void> => {
     dispatch({ type: EActionType.Loading, payload: true });
     try {
-      const res = await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
-      dispatch({ type: EActionType.EditTodo, payload: res.data });
-      loading();
+      void editATodo(id, body).then((res: ITodos) => {
+        dispatch({ type: EActionType.EditTodo, payload: res });
+        loading();
+      });
     } catch (error) {
       fail();
     }
-  }
+  };
 
   async function tickTodo (id: string, body: { isCompleted: boolean }): Promise<void> {
     dispatch({ type: EActionType.Loading, payload: true });
     try {
-      await axios.put(`${BaseUrl}` + '/' + `${id}`, body).then();
-      dispatch({ type: EActionType.TickTodo, payload: id });
-      loading();
+      void tickATodo(id, body).then(() => {
+        dispatch({ type: EActionType.TickTodo, payload: id });
+        loading();
+      });
     } catch (error) {
       fail();
     }
